@@ -5,15 +5,25 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    count: 0,
+    myName: 'Yong',
+    study: 'Front-end',
+    count: 240,
+    todos: [],
   },
-  getters: {},
+  getters: {
+    todoNum(state) {
+      return state.todos.length;
+    },
+  },
   actions: {
     plus({ commit }, value) {
       commit('PLUS', value);
     },
     minus({ commit }, value) {
       commit('MINUS', value);
+    },
+    addTodo({ commit }, todo) {
+      commit('ADDTODO', todo);
     },
   },
   mutations: {
@@ -22,6 +32,9 @@ export default new Vuex.Store({
     },
     MINUS(state, value) {
       state.count -= value;
+    },
+    ADDTODO(state, todo) {
+      state.todos.push(todo);
     },
   },
 

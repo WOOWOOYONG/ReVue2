@@ -1,12 +1,15 @@
 <template>
   <div class="hello">
-    <h1>{{ count }}</h1>
+    <h1>Hello I'm {{ myName }} studying {{ study }}</h1>
+    <p>{{ count }} Days</p>
     <button type="button" @click="decreasement">minus</button>
     <button type="button" @click="increment">plus</button>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'CountItem',
   data() {
@@ -14,11 +17,18 @@ export default {
       n: 1,
     };
   },
-
+  // computed: {
+  //   count() {
+  //     return this.$store.state.count;
+  //   },
+  // },
   computed: {
-    count() {
-      return this.$store.state.count;
-    },
+    // ...mapState({
+    //   count: 'count',
+    //   myName: 'myName',
+    //   study: 'study',
+    // }),
+    ...mapState(['count', 'myName', 'study']),
   },
   methods: {
     increment() {
