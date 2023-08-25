@@ -1,14 +1,19 @@
 <template>
+  <main>
   <div class="hello">
     <h1>Hello I'm {{ myName }} studying {{ study }}</h1>
     <p>{{ count }} Days</p>
     <button type="button" @click="decreasement">minus</button>
     <button type="button" @click="increment">plus</button>
   </div>
+  <p>我是來自mixin的 {{ code }}</p>
+  </main>
+
 </template>
 
 <script>
 import { mapState } from 'vuex';
+import secret from '@/mixins/secret';
 
 export default {
   name: 'CountItem',
@@ -38,6 +43,7 @@ export default {
       this.$store.dispatch('minus', this.n);
     },
   },
+  mixins: [secret],
 };
 </script>
 
