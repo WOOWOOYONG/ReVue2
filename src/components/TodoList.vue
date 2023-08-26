@@ -1,7 +1,9 @@
 <template>
   <div>
     <input type="text" placeholder="Add Todo" aria-label="TodoInput" v-model="todoInput" />
-    <button type="button" @click="addTodo">Add</button>
+      <button type="button" @click="addTodo">Add</button>
+      <button type="button" @click="getTodo">Get Asynchronous</button>
+
     <div class="todo">
       <p>Todos: {{ todos }}</p>
       <p>(From Getters) TodoNum: {{ todoNum }}</p>
@@ -21,6 +23,9 @@ export default {
     addTodo() {
       this.$store.dispatch('addTodo', this.todoInput);
       this.todoInput = '';
+    },
+    getTodo() {
+      this.$store.dispatch('getTodo');
     },
   },
   computed: {
