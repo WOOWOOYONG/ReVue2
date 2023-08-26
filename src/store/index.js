@@ -25,6 +25,12 @@ export default new Vuex.Store({
     addTodo({ commit }, todo) {
       commit('ADDTODO', todo);
     },
+    randomPlus({ commit }, value) {
+      commit('RANDOMPLUS', value);
+    },
+    randomMinus({ commit }, value) {
+      commit('RANDOMMINUS', value);
+    },
   },
   mutations: {
     PLUS(state, value) {
@@ -35,6 +41,16 @@ export default new Vuex.Store({
     },
     ADDTODO(state, todo) {
       state.todos.push(todo);
+    },
+    RANDOMPLUS(state, value) {
+      setTimeout(() => {
+        state.count += value;
+      }, 1000);
+    },
+    RANDOMMINUS(state, value) {
+      setTimeout(() => {
+        state.count -= value;
+      }, 1000);
     },
   },
 
