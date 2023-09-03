@@ -1,5 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
+import * as Cookies from 'js-cookie';
+import CryptoJS from 'crypto-js';
 
 Vue.use(Vuex);
 
@@ -10,6 +13,27 @@ export default new Vuex.Store({
     count: 240,
     todos: [],
   },
+  plugins: [
+    createPersistedState({
+      // 儲存到cookie
+      storage: {
+        getItem: (key) => {
+          const cookieValue = Cookies.get(key);
+          const bytes = CryptoJS.AES.decrypt(cookieValue, 'One-Piece');
+          const decryptValue = bytes.toString(CryptoJS.enc.Utf8);
+          return decryptValue;
+        },
+        setItem: (key, value) => {
+          console.log('Value before encryption:', value);
+          const stringValue = value.toString();
+          const encryptValue = CryptoJS.AES.encrypt(stringValue, 'One-Piece').toString();
+          Cookies.set(key, encryptValue, { expires: 3, secure: true });
+          console.log('Value after encryption:', encryptValue);
+        },
+        removeItem: (key) => Cookies.remove(key),
+      },
+    }),
+  ],
   getters: {
     todoNum(state) {
       return state.todos.length;
