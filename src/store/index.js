@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import { getField, updateField } from 'vuex-map-fields';
 import createPersistedState from 'vuex-persistedstate';
 import * as Cookies from 'js-cookie';
 import CryptoJS from 'crypto-js';
@@ -12,6 +13,14 @@ export default new Vuex.Store({
     study: 'Front-end',
     count: 240,
     todos: [],
+    // fieldForm: {
+    //   nickname: '',
+    //   job: '',
+    //   phone: '',
+    // },
+    fieldName: '',
+    fieldJob: '',
+    fieldPhone: '',
   },
   plugins: [
     createPersistedState({
@@ -38,6 +47,7 @@ export default new Vuex.Store({
     todoNum(state) {
       return state.todos.length;
     },
+    getField,
   },
   actions: {
     plus({ commit }, value) {
@@ -91,6 +101,7 @@ export default new Vuex.Store({
         state.count -= value;
       }, 1000);
     },
+    updateField,
   },
 
   modules: {},
